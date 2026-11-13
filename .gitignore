@@ -3,3 +3,7 @@ backend/agendamento.db
 backend/agendamento.db-shm
 backend/agendamento.db-wal
 backend/.env
+files/
+debugs.txt
+*.db
+.env
