@@ -18,9 +18,9 @@ const PADRAO = {
 function descreverDias(dias) {
   const n = dias.split(',').map(Number);
   const contiguo = n.every((d, i) => i === 0 || d === n[i - 1] + 1);
-  return n.length > 2 && contiguo
-    ? `${NOMES_DIAS[n[0]]} a ${NOMES_DIAS[n[n.length - 1]]}`
-    : n.map(d => NOMES_DIAS[d]).join(', ');
+  if (n.length > 2 && contiguo) return `${NOMES_DIAS[n[0]]} a ${NOMES_DIAS[n[n.length - 1]]}`;
+  if (n.length === 2) return `${NOMES_DIAS[n[0]]} e ${NOMES_DIAS[n[1]]}`;
+  return n.map(d => NOMES_DIAS[d]).join(', ');
 }
 
 // Aceita array [1,2,3] ou string "1,2,3". Devolve string normalizada ou null se inválido.

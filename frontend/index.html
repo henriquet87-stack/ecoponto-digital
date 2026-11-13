@@ -3,312 +3,421 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AgendaFácil — Gerenciamento de Agendamentos</title>
+  <meta name="description" content="EcoPonto Digital: agendamento de entrega de resíduos especiais em pontos de coleta." />
+  <meta name="theme-color" content="#0f0f10" />
+  <title>EcoPonto Digital — Agendamento de entrega de resíduos</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
-  <!-- Sidebar -->
-  <aside class="sidebar" id="sidebar">
+  <a class="skip-link" href="#conteudo" id="skip">Ir para o conteúdo principal</a>
 
-    <a href="#" class="sidebar-brand" onclick="irPara('dashboard')">
-      <span class="brand-icon">✂</span>
-      <span class="brand-name">AgendaFácil</span>
-    </a>
+  <header class="topo no-print">
+    <div class="topo-in">
+      <a href="#inicio" class="marca"><span aria-hidden="true">♻</span> EcoPonto Digital</a>
+      <button type="button" id="btn-menu" class="btn btn-sm btn-menu" aria-expanded="false" aria-controls="menus">Menu</button>
 
-    <nav class="sidebar-nav">
-      <a href="#" class="nav-item active" data-page="dashboard">
-        <span class="nav-icon">◈</span>
-        <span class="nav-label">Dashboard</span>
-      </a>
-      <a href="#" class="nav-item" data-page="agendamentos">
-        <span class="nav-icon">◷</span>
-        <span class="nav-label">Agendamentos</span>
-      </a>
-      <a href="#" class="nav-item" data-page="clientes">
-        <span class="nav-icon">◉</span>
-        <span class="nav-label">Clientes</span>
-      </a>
-      <a href="#" class="nav-item" data-page="servicos">
-        <span class="nav-icon">◆</span>
-        <span class="nav-label">Serviços</span>
-      </a>
-    </nav>
-
-    <div class="sidebar-footer">
-      <button class="btn-sair" onclick="Auth.logout()" title="Encerrar sessão">
-        <span class="nav-icon">⎋</span>
-        <span class="nav-label">Sair</span>
-      </button>
-      <span class="sidebar-copyright">© 2026 AgendaFácil</span>
+      <div id="menus" class="menus">
+        <nav id="nav-publico" aria-label="Navegação principal">
+          <a href="#inicio" data-nav="inicio">Início</a>
+          <a href="#agendar" data-nav="agendar">Agendar entrega</a>
+          <a href="#historico" data-nav="historico">Meu histórico</a>
+          <a href="#operador" data-nav="operador">Área do operador</a>
+        </nav>
+        <nav id="nav-operador" aria-label="Área do operador" hidden>
+          <a href="#op-agendamentos" data-nav="op-agendamentos">Agendamentos</a>
+          <a href="#op-pontos" data-nav="op-pontos">Pontos de coleta</a>
+          <a href="#op-residuos" data-nav="op-residuos">Resíduos</a>
+          <a href="#op-analise" data-nav="op-analise">Análise de dados</a>
+          <button type="button" id="btn-sair-op" class="link-btn">Sair</button>
+        </nav>
+      </div>
     </div>
+  </header>
 
-  </aside>
+  <main id="conteudo" tabindex="-1">
 
-  <!-- Aba de toggle (sobressai da borda direita da sidebar) -->
-  <button class="sidebar-toggle" id="sidebar-toggle" title="Expandir menu">
-    <span class="chevron">›</span>
-  </button>
-
-  <!-- Overlay escuro para mobile (fecha sidebar ao clicar fora) -->
-  <div class="sidebar-overlay" id="sidebar-overlay"></div>
-
-  <!-- Main content -->
-  <main class="main">
-
-    <!-- ======= DASHBOARD ======= -->
-    <section id="page-dashboard" class="page active">
-      <header class="page-header">
-        <div>
-          <p class="page-eyebrow">Visão Geral</p>
-          <h1 class="page-title">Dashboard</h1>
-        </div>
-        <span id="dash-date" class="dash-date"></span>
-      </header>
-
-      <div class="cards-grid">
-        <div class="stat-card accent">
-          <p class="stat-label">Agendamentos Hoje</p>
-          <p class="stat-value" id="stat-hoje">—</p>
-        </div>
-        <div class="stat-card">
-          <p class="stat-label">Total de Clientes</p>
-          <p class="stat-value" id="stat-clientes">—</p>
-        </div>
-        <div class="stat-card">
-          <p class="stat-label">Serviços Cadastrados</p>
-          <p class="stat-value" id="stat-servicos">—</p>
-        </div>
-        <div class="stat-card">
-          <p class="stat-label">Receita do Dia</p>
-          <p class="stat-value" id="stat-receita">—</p>
+    <!-- ============ INÍCIO ============ -->
+    <section id="view-inicio" class="view" aria-labelledby="t-inicio">
+      <div class="hero">
+        <h1 id="t-inicio" tabindex="-1">Agende a entrega correta dos seus resíduos especiais</h1>
+        <p class="lead">Escolha o tipo de resíduo, o ponto de coleta e o horário. Serve para pessoas físicas e para empresas.</p>
+        <div class="acoes">
+          <a class="btn btn-primario" href="#agendar">Agendar uma entrega</a>
+          <a class="btn" href="#historico">Ver meu histórico</a>
         </div>
       </div>
 
-      <div class="dash-bottom">
-        <div class="dash-panel">
-          <h2 class="panel-title">Agenda de Hoje</h2>
-          <div id="agenda-hoje" class="agenda-list">
-            <p class="empty-state">Carregando...</p>
-          </div>
+      <h2>Como funciona</h2>
+      <ol class="passos">
+        <li>Identifique-se com CPF ou CNPJ e telefone, ou faça um cadastro rápido. Não há senha.</li>
+        <li>Escolha o resíduo. O sistema mostra apenas os pontos que o aceitam.</li>
+        <li>Selecione a data e um horário livre. Você recebe o comprovante com as instruções de descarte.</li>
+      </ol>
+
+      <h2>Resíduos aceitos</h2>
+      <ul id="lista-residuos-home" class="grade-residuos" aria-live="polite">
+        <li>Carregando…</li>
+      </ul>
+      <p class="nota">Protótipo acadêmico: os pontos de coleta cadastrados são fictícios, criados para demonstração.</p>
+    </section>
+
+    <!-- ============ IDENTIFICAÇÃO ============ -->
+    <section id="view-identificar" class="view" aria-labelledby="t-identificar" hidden>
+      <h1 id="t-identificar" tabindex="-1">Identificação</h1>
+      <p class="lead">Para agendar, informe seus dados. Não é necessário criar senha.</p>
+
+      <div class="modo" role="group" aria-label="Escolha como se identificar">
+        <button type="button" id="modo-entrar" class="btn" aria-pressed="true">Já tenho cadastro</button>
+        <button type="button" id="modo-cadastro" class="btn" aria-pressed="false">Quero me cadastrar</button>
+      </div>
+
+      <form id="form-entrar" class="cartao form-estreito">
+        <div class="campo">
+          <label for="ent-doc">CPF ou CNPJ</label>
+          <input type="text" id="ent-doc" inputmode="numeric" autocomplete="off" required />
         </div>
-        <div class="dash-panel">
-          <h2 class="panel-title">Ação Rápida</h2>
-          <button class="btn btn-primary full-width" onclick="abrirModalAgendamento()">
-            + Novo Agendamento
-          </button>
-          <button class="btn btn-ghost full-width mt-sm" onclick="irPara('clientes')">
-            + Novo Cliente
-          </button>
-          <button class="btn btn-ghost full-width mt-sm" onclick="irPara('servicos')">
-            + Novo Serviço
-          </button>
+        <div class="campo">
+          <label for="ent-tel">Telefone com DDD</label>
+          <input type="tel" id="ent-tel" autocomplete="tel-national" placeholder="(17) 99999-9999" required />
         </div>
+        <p id="ent-erro" class="form-erro" role="alert" hidden></p>
+        <button type="submit" class="btn btn-primario" id="ent-enviar">Entrar</button>
+      </form>
+
+      <form id="form-cadastro" class="cartao form-estreito" hidden>
+        <fieldset class="campo">
+          <legend>Tipo de cadastro</legend>
+          <label class="campo-radio"><input type="radio" name="cad-tipo" value="pf" checked /> Pessoa física</label>
+          <label class="campo-radio"><input type="radio" name="cad-tipo" value="pj" /> Pessoa jurídica (empresa)</label>
+        </fieldset>
+        <div class="campo">
+          <label for="cad-nome" id="cad-nome-rotulo">Nome completo</label>
+          <input type="text" id="cad-nome" autocomplete="name" maxlength="120" required />
+        </div>
+        <div class="campo">
+          <label for="cad-doc" id="cad-doc-rotulo">CPF</label>
+          <input type="text" id="cad-doc" inputmode="numeric" autocomplete="off" required />
+        </div>
+        <div class="campo" id="cad-resp-grupo" hidden>
+          <label for="cad-resp">Nome do responsável pela empresa</label>
+          <input type="text" id="cad-resp" autocomplete="off" maxlength="120" />
+        </div>
+        <div class="campo">
+          <label for="cad-tel">Telefone com DDD</label>
+          <input type="tel" id="cad-tel" autocomplete="tel-national" placeholder="(17) 99999-9999" required />
+        </div>
+        <div class="campo">
+          <label for="cad-email">E-mail (opcional)</label>
+          <input type="email" id="cad-email" autocomplete="email" />
+        </div>
+        <p id="cad-erro" class="form-erro" role="alert" hidden></p>
+        <button type="submit" class="btn btn-primario" id="cad-enviar">Cadastrar e continuar</button>
+      </form>
+    </section>
+
+    <!-- ============ AGENDAR ============ -->
+    <section id="view-agendar" class="view" aria-labelledby="t-agendar" hidden>
+      <h1 id="t-agendar" tabindex="-1">Agendar entrega</h1>
+      <p>Agendando como <strong id="ag-usuario-nome"></strong>.
+         <button type="button" id="ag-trocar" class="btn btn-sm">Não sou eu / trocar</button></p>
+
+      <form id="form-agendar" class="cartao">
+        <div class="campo">
+          <label for="ag-residuo">1. Tipo de resíduo</label>
+          <select id="ag-residuo" required><option value="">Selecione…</option></select>
+          <p id="ag-instrucoes" class="dica"></p>
+        </div>
+        <div class="campo">
+          <label for="ag-ponto">2. Ponto de coleta</label>
+          <select id="ag-ponto" required disabled><option value="">Selecione o resíduo primeiro</option></select>
+          <p id="ag-ponto-info" class="dica" aria-live="polite"></p>
+        </div>
+        <div class="campo">
+          <label for="ag-data">3. Data da entrega</label>
+          <input type="date" id="ag-data" required disabled />
+        </div>
+        <fieldset class="campo">
+          <legend>4. Horário disponível</legend>
+          <div id="ag-slots" class="slots"></div>
+          <p id="ag-slots-msg" class="dica" aria-live="polite">Escolha o ponto e a data para ver os horários.</p>
+        </fieldset>
+        <div class="campo">
+          <label for="ag-qtd">Quantidade estimada <span id="ag-qtd-obrig">(opcional)</span></label>
+          <input type="text" id="ag-qtd" maxlength="60" placeholder="Ex.: 12 unidades ou 5 kg" />
+        </div>
+        <div class="campo">
+          <label for="ag-obs">Observações (opcional)</label>
+          <textarea id="ag-obs" rows="2" maxlength="500"></textarea>
+        </div>
+        <p id="ag-erro" class="form-erro" role="alert" hidden></p>
+        <button type="submit" class="btn btn-primario" id="ag-enviar">Confirmar agendamento</button>
+      </form>
+    </section>
+
+    <!-- ============ CONFIRMAÇÃO ============ -->
+    <section id="view-confirmacao" class="view" aria-labelledby="t-confirmacao" hidden>
+      <div class="imprimir">
+        <div class="cartao">
+          <h1 id="t-confirmacao" tabindex="-1">Agendamento confirmado</h1>
+          <dl id="conf-dados" class="dados"></dl>
+          <p id="conf-instrucoes"></p>
+          <p class="nota">O operador do ponto é avisado do agendamento e poderá entrar em contato pelo telefone informado. Guarde este comprovante.</p>
+        </div>
+      </div>
+      <div class="acoes no-print">
+        <button type="button" class="btn btn-primario" id="conf-imprimir">Imprimir comprovante</button>
+        <a class="btn" href="#agendar">Novo agendamento</a>
+        <a class="btn" href="#historico">Ver meu histórico</a>
       </div>
     </section>
 
-    <!-- ======= AGENDAMENTOS ======= -->
-    <section id="page-agendamentos" class="page">
-      <header class="page-header">
-        <div>
-          <p class="page-eyebrow">Gestão de Horários</p>
-          <h1 class="page-title">Agendamentos</h1>
-        </div>
-        <button class="btn btn-primary" onclick="abrirModalAgendamento()">+ Novo</button>
-      </header>
-
-      <div class="filter-bar">
-        <label>
-          Filtrar por data:
-          <input type="date" id="filtro-data" onchange="carregarAgendamentos()" />
-        </label>
-        <button class="btn btn-ghost btn-sm" onclick="document.getElementById('filtro-data').value=''; carregarAgendamentos()">
-          Limpar filtro
-        </button>
+    <!-- ============ HISTÓRICO ============ -->
+    <section id="view-historico" class="view" aria-labelledby="t-historico" hidden>
+      <h1 id="t-historico" tabindex="-1">Meu histórico de entregas</h1>
+      <div class="acoes no-print" id="hist-acoes">
+        <button type="button" class="btn btn-primario" id="hist-imprimir" hidden>Imprimir / salvar em PDF</button>
       </div>
+      <div class="imprimir" id="historico-impressao">
+        <div class="print-only" id="hist-cabecalho-impressao"></div>
+        <p id="hist-usuario"></p>
+        <dl id="hist-resumo" class="resumo"></dl>
+        <div class="tabela-wrap">
+          <table class="tabela">
+            <caption class="sr-only">Entregas agendadas</caption>
+            <thead>
+              <tr>
+                <th scope="col">Data e hora</th>
+                <th scope="col">Resíduo</th>
+                <th scope="col">Ponto de coleta</th>
+                <th scope="col">Quantidade</th>
+                <th scope="col">Situação</th>
+              </tr>
+            </thead>
+            <tbody id="hist-corpo"><tr><td colspan="5">Carregando…</td></tr></tbody>
+          </table>
+        </div>
+        <p class="print-only nota">Documento gerado pelo sistema EcoPonto Digital (protótipo acadêmico). A situação “Concluído” indica entrega confirmada pelo operador do ponto.</p>
+      </div>
+    </section>
 
-      <div class="table-wrap">
-        <table class="data-table">
+    <!-- ============ OPERADOR: LOGIN ============ -->
+    <section id="view-operador" class="view" aria-labelledby="t-operador" hidden>
+      <h1 id="t-operador" tabindex="-1">Área do operador</h1>
+      <p class="lead">Acesso restrito ao operador municipal.</p>
+      <form id="form-op-login" class="cartao form-estreito">
+        <div class="campo">
+          <label for="op-usuario">Usuário</label>
+          <input type="text" id="op-usuario" autocomplete="username" required />
+        </div>
+        <div class="campo">
+          <label for="op-senha">Senha</label>
+          <input type="password" id="op-senha" autocomplete="current-password" required />
+        </div>
+        <p id="op-erro" class="form-erro" role="alert" hidden></p>
+        <button type="submit" class="btn btn-primario" id="op-entrar">Entrar</button>
+      </form>
+    </section>
+
+    <!-- ============ OPERADOR: AGENDAMENTOS ============ -->
+    <section id="view-op-agendamentos" class="view" aria-labelledby="t-op-ag" hidden>
+      <h1 id="t-op-ag" tabindex="-1">Agendamentos</h1>
+
+      <form id="form-filtros" class="cartao filtros">
+        <div class="campo"><label for="f-data">Data</label><input type="date" id="f-data" /></div>
+        <div class="campo"><label for="f-ponto">Ponto</label><select id="f-ponto"><option value="">Todos</option></select></div>
+        <div class="campo"><label for="f-residuo">Resíduo</label><select id="f-residuo"><option value="">Todos</option></select></div>
+        <div class="campo"><label for="f-status">Situação</label>
+          <select id="f-status">
+            <option value="">Todas</option>
+            <option value="confirmado">Confirmado</option>
+            <option value="concluido">Concluído</option>
+            <option value="cancelado">Cancelado</option>
+          </select>
+        </div>
+        <div class="campo acoes-linha">
+          <button type="submit" class="btn btn-primario">Filtrar</button>
+          <button type="button" class="btn" id="f-todas">Todas as datas</button>
+        </div>
+      </form>
+
+      <dl id="op-cards" class="resumo" aria-live="polite"></dl>
+
+      <div class="tabela-wrap">
+        <table class="tabela">
+          <caption class="sr-only">Lista de agendamentos</caption>
           <thead>
             <tr>
-              <th>Data / Hora</th>
-              <th>Cliente</th>
-              <th>Serviço</th>
-              <th>Duração</th>
-              <th>Valor</th>
-              <th>Status</th>
-              <th>Ações</th>
+              <th scope="col">Data e hora</th>
+              <th scope="col">Cidadão</th>
+              <th scope="col">Resíduo</th>
+              <th scope="col">Ponto</th>
+              <th scope="col">Situação</th>
+              <th scope="col">Ações</th>
             </tr>
           </thead>
-          <tbody id="tabela-agendamentos">
-            <tr><td colspan="7" class="empty-state">Carregando...</td></tr>
-          </tbody>
+          <tbody id="op-ag-corpo"><tr><td colspan="6">Carregando…</td></tr></tbody>
         </table>
       </div>
     </section>
 
-    <!-- ======= CLIENTES ======= -->
-    <section id="page-clientes" class="page">
-      <header class="page-header">
-        <div>
-          <p class="page-eyebrow">Cadastro</p>
-          <h1 class="page-title">Clientes</h1>
-        </div>
-        <button class="btn btn-primary" onclick="abrirModalCliente()">+ Novo</button>
-      </header>
-
-      <div class="table-wrap">
-        <table class="data-table">
+    <!-- ============ OPERADOR: PONTOS ============ -->
+    <section id="view-op-pontos" class="view" aria-labelledby="t-op-pt" hidden>
+      <div class="cabecalho-pagina">
+        <h1 id="t-op-pt" tabindex="-1">Pontos de coleta</h1>
+        <button type="button" class="btn btn-primario" id="btn-novo-ponto">Novo ponto</button>
+      </div>
+      <div class="tabela-wrap">
+        <table class="tabela">
+          <caption class="sr-only">Pontos de coleta cadastrados</caption>
           <thead>
             <tr>
-              <th>Nome</th>
-              <th>Telefone</th>
-              <th>E-mail</th>
-              <th>Cadastrado em</th>
-              <th>Ações</th>
+              <th scope="col">Ponto</th>
+              <th scope="col">Endereço</th>
+              <th scope="col">Funcionamento</th>
+              <th scope="col">Capacidade</th>
+              <th scope="col">Resíduos aceitos</th>
+              <th scope="col">Ações</th>
             </tr>
           </thead>
-          <tbody id="tabela-clientes">
-            <tr><td colspan="5" class="empty-state">Carregando...</td></tr>
-          </tbody>
+          <tbody id="op-pontos-corpo"><tr><td colspan="6">Carregando…</td></tr></tbody>
         </table>
       </div>
     </section>
 
-    <!-- ======= SERVIÇOS ======= -->
-    <section id="page-servicos" class="page">
-      <header class="page-header">
-        <div>
-          <p class="page-eyebrow">Catálogo</p>
-          <h1 class="page-title">Serviços</h1>
-        </div>
-        <button class="btn btn-primary" onclick="abrirModalServico()">+ Novo</button>
-      </header>
+    <!-- ============ OPERADOR: RESÍDUOS ============ -->
+    <section id="view-op-residuos" class="view" aria-labelledby="t-op-rs" hidden>
+      <div class="cabecalho-pagina">
+        <h1 id="t-op-rs" tabindex="-1">Tipos de resíduo</h1>
+        <button type="button" class="btn btn-primario" id="btn-novo-residuo">Novo resíduo</button>
+      </div>
+      <div class="tabela-wrap">
+        <table class="tabela">
+          <caption class="sr-only">Tipos de resíduo cadastrados</caption>
+          <thead>
+            <tr>
+              <th scope="col">Resíduo</th>
+              <th scope="col">Descrição</th>
+              <th scope="col">Instruções de descarte</th>
+              <th scope="col">Ações</th>
+            </tr>
+          </thead>
+          <tbody id="op-residuos-corpo"><tr><td colspan="4">Carregando…</td></tr></tbody>
+        </table>
+      </div>
+    </section>
 
-      <div class="servicos-grid" id="servicos-grid">
-        <p class="empty-state">Carregando...</p>
+    <!-- ============ OPERADOR: ANÁLISE ============ -->
+    <section id="view-op-analise" class="view" aria-labelledby="t-op-an" hidden>
+      <h1 id="t-op-an" tabindex="-1">Análise de dados</h1>
+      <form id="form-analise" class="cartao filtros">
+        <div class="campo"><label for="an-inicio">Data inicial</label><input type="date" id="an-inicio" /></div>
+        <div class="campo"><label for="an-fim">Data final</label><input type="date" id="an-fim" /></div>
+        <div class="campo"><label for="an-agrupar">Agrupar período por</label>
+          <select id="an-agrupar"><option value="dia">Dia</option><option value="mes">Mês</option></select>
+        </div>
+        <div class="campo"><button type="submit" class="btn btn-primario">Atualizar</button></div>
+      </form>
+      <p class="nota">Os gráficos consideram os agendamentos não cancelados.</p>
+      <dl id="an-cards" class="resumo" aria-live="polite"></dl>
+      <div class="graficos">
+        <figure><figcaption>Agendamentos por tipo de resíduo</figcaption><div id="g-residuo"></div></figure>
+        <figure><figcaption>Agendamentos por bairro</figcaption><div id="g-bairro"></div></figure>
+        <figure><figcaption>Agendamentos por ponto de coleta</figcaption><div id="g-ponto"></div></figure>
+        <figure><figcaption>Agendamentos por período</figcaption><div id="g-periodo"></div></figure>
       </div>
     </section>
 
   </main>
 
-  <!-- ======= MODAIS ======= -->
+  <footer class="rodape no-print">
+    <p>EcoPonto Digital — Projeto Integrador II, UNIVESP. Protótipo acadêmico (pontos de coleta fictícios).</p>
+  </footer>
 
-  <!-- Modal Agendamento -->
-  <div class="modal-overlay" id="modal-agendamento">
-    <div class="modal">
-      <div class="modal-header">
-        <h2 id="modal-ag-titulo">Novo Agendamento</h2>
-        <button class="modal-close" onclick="fecharModal('modal-agendamento')">✕</button>
-      </div>
-      <div class="modal-body">
-        <input type="hidden" id="ag-id" />
-        <div class="form-group">
-          <label>Cliente *</label>
-          <select id="ag-cliente"></select>
-        </div>
-        <div class="form-group">
-          <label>Serviço *</label>
-          <select id="ag-servico" onchange="atualizarInfoServico()"></select>
-        </div>
-        <div class="info-servico" id="info-servico" style="display:none">
-          <span id="info-duracao"></span> · <span id="info-valor"></span>
-        </div>
-        <div class="form-group">
-          <label>Data e Hora *</label>
-          <input type="datetime-local" id="ag-data" />
-        </div>
-        <div class="form-group">
-          <label>Observações</label>
-          <textarea id="ag-obs" rows="2" placeholder="Opcional..."></textarea>
-        </div>
-        <div id="ag-erro" class="form-erro" style="display:none"></div>
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-ghost" onclick="fecharModal('modal-agendamento')">Cancelar</button>
-        <button class="btn btn-primary" onclick="salvarAgendamento()">Salvar</button>
-      </div>
-    </div>
-  </div>
+  <div id="aviso" class="aviso" role="status" aria-live="polite"></div>
 
-  <!-- Modal Cliente -->
-  <div class="modal-overlay" id="modal-cliente">
-    <div class="modal">
-      <div class="modal-header">
-        <h2 id="modal-cl-titulo">Novo Cliente</h2>
-        <button class="modal-close" onclick="fecharModal('modal-cliente')">✕</button>
+  <!-- ============ DIÁLOGO: PONTO DE COLETA ============ -->
+  <dialog id="dlg-ponto" aria-labelledby="dlg-ponto-titulo">
+    <form id="form-ponto" method="dialog">
+      <div class="dialogo-topo">
+        <h2 id="dlg-ponto-titulo">Novo ponto de coleta</h2>
+        <button type="button" class="btn btn-sm" data-fechar aria-label="Fechar janela">✕</button>
       </div>
-      <div class="modal-body">
-        <input type="hidden" id="cl-id" />
-        <div class="form-group">
-          <label>Nome *</label>
-          <input type="text" id="cl-nome" placeholder="Nome completo" />
-        </div>
-        <div class="form-group">
-          <label>Telefone *</label>
-          <input type="tel" id="cl-telefone" placeholder="(17) 99999-9999" />
-        </div>
-        <div class="form-group">
-          <label>E-mail</label>
-          <input type="email" id="cl-email" placeholder="opcional@email.com" />
-        </div>
-        <div id="cl-erro" class="form-erro" style="display:none"></div>
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-ghost" onclick="fecharModal('modal-cliente')">Cancelar</button>
-        <button class="btn btn-primary" onclick="salvarCliente()">Salvar</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Modal Serviço -->
-  <div class="modal-overlay" id="modal-servico">
-    <div class="modal">
-      <div class="modal-header">
-        <h2 id="modal-sv-titulo">Novo Serviço</h2>
-        <button class="modal-close" onclick="fecharModal('modal-servico')">✕</button>
-      </div>
-      <div class="modal-body">
-        <input type="hidden" id="sv-id" />
-        <div class="form-group">
-          <label>Nome *</label>
-          <input type="text" id="sv-nome" placeholder="Ex: Corte de Cabelo" />
-        </div>
-        <div class="form-group">
-          <label>Descrição</label>
-          <input type="text" id="sv-desc" placeholder="Opcional" />
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label>Duração (min) *</label>
-            <input type="number" id="sv-duracao" min="5" step="5" placeholder="30" />
+      <div class="dialogo-corpo">
+        <input type="hidden" id="pt-id" />
+        <div class="campo"><label for="pt-nome">Nome do ponto</label><input type="text" id="pt-nome" maxlength="80" required /></div>
+        <div class="campo">
+          <label for="pt-cep">CEP</label>
+          <div class="linha-cep">
+            <input type="text" id="pt-cep" inputmode="numeric" placeholder="00000-000" autocomplete="postal-code" />
+            <button type="button" class="btn" id="btn-cep">Buscar endereço</button>
           </div>
-          <div class="form-group">
-            <label>Valor (R$) *</label>
-            <input type="number" id="sv-valor" min="0" step="0.01" placeholder="0,00" />
-          </div>
+          <p id="pt-cep-status" class="dica" aria-live="polite">Opcional: o endereço é preenchido pela API ViaCEP.</p>
         </div>
-        <div id="sv-erro" class="form-erro" style="display:none"></div>
+        <div class="campo"><label for="pt-endereco">Endereço</label><input type="text" id="pt-endereco" required /></div>
+        <div class="linha-campos">
+          <div class="campo"><label for="pt-bairro">Bairro</label><input type="text" id="pt-bairro" required /></div>
+          <div class="campo"><label for="pt-cidade">Cidade</label><input type="text" id="pt-cidade" value="Barretos" /></div>
+        </div>
+        <fieldset class="campo">
+          <legend>Dias de funcionamento</legend>
+          <div class="grupo-checks" id="pt-dias">
+            <label class="campo-radio"><input type="checkbox" name="pt-dia" value="1" /> Segunda</label>
+            <label class="campo-radio"><input type="checkbox" name="pt-dia" value="2" /> Terça</label>
+            <label class="campo-radio"><input type="checkbox" name="pt-dia" value="3" /> Quarta</label>
+            <label class="campo-radio"><input type="checkbox" name="pt-dia" value="4" /> Quinta</label>
+            <label class="campo-radio"><input type="checkbox" name="pt-dia" value="5" /> Sexta</label>
+            <label class="campo-radio"><input type="checkbox" name="pt-dia" value="6" /> Sábado</label>
+            <label class="campo-radio"><input type="checkbox" name="pt-dia" value="0" /> Domingo</label>
+          </div>
+        </fieldset>
+        <div class="linha-campos">
+          <div class="campo"><label for="pt-abre">Abertura</label><input type="time" id="pt-abre" value="08:00" required /></div>
+          <div class="campo"><label for="pt-fecha">Fechamento</label><input type="time" id="pt-fecha" value="17:00" required /></div>
+          <div class="campo"><label for="pt-intervalo">Duração de cada horário (min)</label><input type="number" id="pt-intervalo" min="10" max="240" step="5" value="30" required /></div>
+          <div class="campo"><label for="pt-cap">Entregas por horário</label><input type="number" id="pt-cap" min="1" max="50" value="3" required /></div>
+        </div>
+        <fieldset class="campo">
+          <legend>Resíduos aceitos neste ponto</legend>
+          <div class="grupo-checks" id="pt-residuos"></div>
+        </fieldset>
+        <label class="campo-radio" id="pt-ativo-grupo"><input type="checkbox" id="pt-ativo" checked /> Ponto ativo (visível para agendamento)</label>
+        <p id="pt-erro" class="form-erro" role="alert" hidden></p>
       </div>
-      <div class="modal-footer">
-        <button class="btn btn-ghost" onclick="fecharModal('modal-servico')">Cancelar</button>
-        <button class="btn btn-primary" onclick="salvarServico()">Salvar</button>
+      <div class="dialogo-rodape">
+        <button type="button" class="btn" data-fechar>Cancelar</button>
+        <button type="submit" class="btn btn-primario" id="pt-salvar">Salvar ponto</button>
       </div>
-    </div>
-  </div>
+    </form>
+  </dialog>
 
-  <!-- Toast de notificação -->
-  <div id="toast" class="toast"></div>
+  <!-- ============ DIÁLOGO: RESÍDUO ============ -->
+  <dialog id="dlg-residuo" aria-labelledby="dlg-residuo-titulo">
+    <form id="form-residuo" method="dialog">
+      <div class="dialogo-topo">
+        <h2 id="dlg-residuo-titulo">Novo tipo de resíduo</h2>
+        <button type="button" class="btn btn-sm" data-fechar aria-label="Fechar janela">✕</button>
+      </div>
+      <div class="dialogo-corpo">
+        <input type="hidden" id="rs-id" />
+        <div class="campo"><label for="rs-nome">Nome</label><input type="text" id="rs-nome" maxlength="60" required /></div>
+        <div class="campo"><label for="rs-desc">Descrição (opcional)</label><input type="text" id="rs-desc" maxlength="200" /></div>
+        <div class="campo"><label for="rs-instr">Instruções de descarte (opcional)</label><textarea id="rs-instr" rows="3" maxlength="500"></textarea></div>
+        <div class="campo"><label for="rs-icone">Ícone (um emoji, opcional)</label><input type="text" id="rs-icone" maxlength="8" /></div>
+        <p id="rs-erro" class="form-erro" role="alert" hidden></p>
+      </div>
+      <div class="dialogo-rodape">
+        <button type="button" class="btn" data-fechar>Cancelar</button>
+        <button type="submit" class="btn btn-primario" id="rs-salvar">Salvar resíduo</button>
+      </div>
+    </form>
+  </dialog>
 
   <script src="js/api.js"></script>
   <script src="js/auth.js"></script>
   <script src="js/app.js"></script>
-
-  <!-- Cloudflare Web Analytics -->
-  <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a6431a57ab3c4528bd5e6627219691d3"}'></script>
-  <!-- End Cloudflare Web Analytics -->
 </body>
 </html>

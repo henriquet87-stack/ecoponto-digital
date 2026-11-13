@@ -6,4 +6,6 @@ backend/.env
 files/
 debugs.txt
 *.db
+*.db-shm
+*.db-wal
 .env
