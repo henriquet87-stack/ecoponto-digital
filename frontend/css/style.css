@@ -206,12 +206,12 @@ select:disabled, input:disabled { opacity: .6; cursor: not-allowed; }
 @media (max-width: 520px) { .dados { grid-template-columns: 1fr; gap: 0; } .dados dd { margin-bottom: .6rem; } }
 
 /* ===== GRÁFICOS (barras em HTML: texto legível por leitores de tela) ===== */
-.graficos { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 1rem; }
+.graficos { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: 1rem; }
 .graficos figure { margin: 0; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem; }
 .graficos figcaption { font-family: 'Syne', sans-serif; font-weight: 700; margin-bottom: .8rem; }
 .barras { list-style: none; margin: 0; padding: 0; display: grid; gap: .6rem; }
-.barras li { display: grid; grid-template-columns: minmax(90px, 30%) 1fr 2.6rem; gap: .75rem; align-items: center; }
-.barra-rotulo { overflow-wrap: anywhere; }
+.barras li { display: grid; grid-template-columns: minmax(110px, 34%) 1fr 2.2rem; gap: .75rem; align-items: center; }
+.barra-rotulo { overflow-wrap: break-word; }
 .barra-trilho { height: 14px; background: var(--surface2); border-radius: 99px; overflow: hidden; }
 .barra-preenchida { display: block; height: 100%; background: var(--accent); }
 .barra-valor { text-align: right; font-weight: 700; }

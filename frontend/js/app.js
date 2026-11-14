@@ -682,7 +682,7 @@ async function carregarAnalise() {
   });
   const r = a.resumo;
   $('#an-cards').innerHTML = [
-    ['Total de agendamentos', r.total], ['Hoje', r.hoje], ['Concluídos', r.concluidos],
+    ['Total (com cancelados)', r.total], ['Hoje', r.hoje], ['Concluídos', r.concluidos],
     ['Pessoa física', r.pessoa_fisica], ['Pessoa jurídica', r.pessoa_juridica],
   ].map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join('');
   desenharBarras('g-residuo', a.por_residuo);
