@@ -78,10 +78,10 @@ small { color: var(--text-muted); }
 }
 .menus a:hover, .link-btn:hover { background: var(--surface2); }
 .menus a[aria-current="page"] { color: var(--accent); box-shadow: inset 0 -3px 0 var(--accent); border-radius: 0; }
-.btn-menu { display: none; }
+.btn.btn-menu { display: none; }   /* só aparece no celular (ver media query) */
 
 @media (max-width: 760px) {
-  .btn-menu { display: inline-flex; margin-left: auto; }
+  .btn.btn-menu { display: inline-flex; margin-left: auto; }
   .menus { display: none; width: 100%; flex-direction: column; align-items: stretch; gap: .5rem; margin-left: 0; }
   .menus.aberto { display: flex; }
   .menus nav { flex-direction: column; align-items: stretch; }
@@ -173,6 +173,7 @@ select:disabled, input:disabled { opacity: .6; cursor: not-allowed; }
 .tabela tr:last-child td { border-bottom: 0; }
 .acoes-linha { display: flex; gap: .4rem; flex-wrap: wrap; }
 .vazio { color: var(--text-muted); padding: 1rem 0; }
+.nowrap { white-space: nowrap; }
 
 @media (max-width: 760px) {
   .tabela thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }

@@ -463,7 +463,7 @@ async function carregarOpAgendamentos() {
       : `<button type="button" class="btn btn-sm" data-acao="confirmado" data-id="${a.id}" aria-label="Reabrir a entrega de ${quem}">Reabrir</button>`;
     return `<tr>
       <td data-label="Data e hora">${esc(fmtDataHora(a.data_hora))}</td>
-      <td data-label="Cidadão">${quem}<br><small>${tipoRotulo(a.usuario_tipo)} · ${esc(fmtTel(a.usuario_telefone))}</small></td>
+      <td data-label="Cidadão">${quem}<br><small>${tipoRotulo(a.usuario_tipo)} · <span class="nowrap">${esc(fmtTel(a.usuario_telefone))}</span></small></td>
       <td data-label="Resíduo">${esc(a.residuo_nome)}${a.quantidade_estimada ? `<br><small>${esc(a.quantidade_estimada)}</small>` : ''}</td>
       <td data-label="Ponto">${esc(a.ponto_nome)}</td>
       <td data-label="Situação">${badge(a.status)}</td>
