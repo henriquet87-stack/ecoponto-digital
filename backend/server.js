@@ -46,14 +46,20 @@ app.use((err, req, res, next) => {
   res.status(500).json({ erro: 'Erro interno do servidor.' });
 });
 
-initDb()
-  .then(() => {
-    app.listen(PORT, () => {
-      console.log(`\n✅ EcoPonto Digital rodando em http://localhost:${PORT}`);
-      console.log(`📋 API disponível em http://localhost:${PORT}/api\n`);
+// Só sobe o servidor quando executado diretamente (node server.js / npm start).
+// Nos testes (Jest + Supertest) o app é importado sem abrir porta.
+if (require.main === module) {
+  initDb()
+    .then(() => {
+      app.listen(PORT, () => {
+        console.log(`\n✅ EcoPonto Digital rodando em http://localhost:${PORT}`);
+        console.log(`📋 API disponível em http://localhost:${PORT}/api\n`);
+      });
+    })
+    .catch(err => {
+      console.error('❌ Erro ao inicializar banco de dados:', err);
+      process.exit(1);
     });
-  })
-  .catch(err => {
-    console.error('❌ Erro ao inicializar banco de dados:', err);
-    process.exit(1);
-  });
+}
+
+module.exports = app;

@@ -1,10 +1,11 @@
 {
-  "name": "agendamento-backend",
+  "name": "ecoponto-digital",
   "version": "1.0.0",
   "description": "Sistema Web para Gerenciamento de Agendamentos - UNIVESP Projeto Integrador",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
+    "test": "jest --runInBand --forceExit",
     "dev": "nodemon server.js"
   },
   "dependencies": {

@@ -24,7 +24,7 @@ if (isProduction) {
 } else {
   db = knex({
     client: 'better-sqlite3',
-    connection: { filename: path.join(__dirname, 'ecoponto.db') },
+    connection: { filename: process.env.DB_FILE || path.join(__dirname, 'ecoponto.db') },
     useNullAsDefault: true
   });
 }
