@@ -146,4 +146,4 @@ Acessibilidade: a auditoria com o Lighthouse registrou **100** na categoria Acce
 **Thiago Henrique da Silva** — RA 24217077 — UNIVESP, polo Barretos/SP
 Orientador: Gabriel Henrique Braga Marinelo
 
-Projeto desenvolvido para fins educacionais. Evolução do **AgendaFácil** (Projeto Integrador I).
+Projeto desenvolvido para fins educacionais.
